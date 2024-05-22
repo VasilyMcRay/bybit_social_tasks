@@ -1,0 +1,1 @@
+tweepy-self==1.11.0
