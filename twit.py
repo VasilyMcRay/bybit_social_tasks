@@ -8,8 +8,6 @@ import twitter
 
 from bybit_social_tasks.random_world.random_world import get_random_world
 
-CAPSOLVER_API_KEY = "CAP-FDA75BCC9B9FE44CABA786F815BCC375"
-
 TWITTERS_TXT = Path("twitters.txt")
 PROXIES_TXT = Path("proxies.txt")
 RESULTS_TXT = Path("results.txt")
