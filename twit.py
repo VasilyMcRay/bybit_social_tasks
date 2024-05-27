@@ -41,7 +41,6 @@ QUOT_FOXY_TWEET_URL = "https://twitter.com/Bybit_Official/status/179065334912298
 
 USER_IDS_TO_FOLLOW = [
     999947328621395968,   # https://twitter.com/Bybit_Official
-    1549038204178911233,  # https://twitter.com/KAMINO
     1673713963056365576,  # https://twitter.com/modenetwork
     1489188578001309697,  #VENOM
     1009135067153616896,  #CELO
