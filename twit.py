@@ -12,9 +12,9 @@ TWITTERS_TXT = Path("twitters.txt")
 PROXIES_TXT = Path("proxies.txt")
 RESULTS_TXT = Path("results.txt")
 
-MAKE_VENOM = False
+MAKE_VENOM = True
 MAKE_MODE = False
-MAKE_KIMONO = False
+MAKE_HLG = False
 MAKE_CELO = False
 MAKE_FOXY = False
 
@@ -34,7 +34,7 @@ if not PROXIES:
     PROXIES = [None]
 
 QUOT_MODE_TWEET_URL = "https://twitter.com/Bybit_Official/status/1786349990094295457"
-QUOT_KIMONO_TWEET_URL = "https://twitter.com/Bybit_Official/status/1785926272305995890"
+QUOT_HLG_TWEET_URL = "https://x.com/Bybit_Official/status/1793582651577659653"
 QUOT_VENOM_TWEET_URL = "https://x.com/Bybit_Official/status/1788507961465135395"
 QUOT_CELO_TWEET_URL = "https://twitter.com/Bybit_Official/status/1790350100868255759"
 QUOT_FOXY_TWEET_URL = "https://twitter.com/Bybit_Official/status/1790653349122986054"
@@ -46,6 +46,7 @@ USER_IDS_TO_FOLLOW = [
     1489188578001309697,  #VENOM
     1009135067153616896,  #CELO
     1760308240628285440,  #FOXY
+    1363534411694702592, #HLG
 ]
 
 
@@ -79,14 +80,14 @@ async def main():
                         final_message = f'{final_message} {mode_tweet.url}'
                         await asyncio.sleep(3)
 
-                    if MAKE_KIMONO:
-                        #Твит KMNO
-                        kimono_tweet = await twitter_client.quote(
-                            QUOT_KIMONO_TWEET_URL, get_random_world()
+                    if MAKE_HLG:
+                        #Твит HLG
+                        hlg_tweet = await twitter_client.quote(
+                            QUOT_HLG_TWEET_URL, get_random_world()
                         )
-                        print(f"{twitter_account} Сделал Quote твит (KMNO): {kimono_tweet.url}")
-                        print(f"\tТекст: {kimono_tweet.text}")
-                        final_message = f'{final_message} {kimono_tweet.url}'
+                        print(f"{twitter_account} Сделал Quote твит (HLG): {hlg_tweet.url}")
+                        print(f"\tТекст: {hlg_tweet.text}")
+                        final_message = f'{final_message} {hlg_tweet.url}'
                         await asyncio.sleep(3)
 
                     if MAKE_VENOM:
