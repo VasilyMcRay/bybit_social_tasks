@@ -12,11 +12,9 @@ TWITTERS_TXT = Path("twitters.txt")
 PROXIES_TXT = Path("proxies.txt")
 RESULTS_TXT = Path("results.txt")
 
-MAKE_VENOM = True
-MAKE_MODE = False
-MAKE_HLG = False
-MAKE_CELO = False
-MAKE_FOXY = False
+MAKE_ZERO = False
+MAKE_BUBBLE = False
+MAKE_SPEC = True
 
 
 for filepath in (
@@ -33,19 +31,16 @@ PROXIES = Proxy.from_file(PROXIES_TXT)
 if not PROXIES:
     PROXIES = [None]
 
-QUOT_MODE_TWEET_URL = "https://twitter.com/Bybit_Official/status/1786349990094295457"
-QUOT_HLG_TWEET_URL = "https://x.com/Bybit_Official/status/1793582651577659653"
-QUOT_VENOM_TWEET_URL = "https://x.com/Bybit_Official/status/1788507961465135395"
-QUOT_CELO_TWEET_URL = "https://twitter.com/Bybit_Official/status/1790350100868255759"
-QUOT_FOXY_TWEET_URL = "https://twitter.com/Bybit_Official/status/1790653349122986054"
+
+QUOT_ZEROLEND_TWEET_URL = 'https://x.com/Bybit_Official/status/1795785918910996696'
+QUOT_SPEC_TWEET_URL = 'https://x.com/Bybit_Official/status/1800437819367645277'
+QUOT_BUBBLE_TWEET_URL = 'https://x.com/Bybit_Official/status/1800800207598153909'
 
 USER_IDS_TO_FOLLOW = [
     999947328621395968,   # https://twitter.com/Bybit_Official
-    1673713963056365576,  # https://twitter.com/modenetwork
-    1489188578001309697,  #VENOM
-    1009135067153616896,  #CELO
-    1760308240628285440,  #FOXY
-    1363534411694702592, #HLG
+    1363534411694702592,  # ZEROLEND
+    1252249857512755201,  # SPEC
+    1478769546207006720,  # BUBBLE
 ]
 
 
@@ -61,7 +56,7 @@ async def main():
         try:
             async with twitter.Client(twitter_account, proxy=proxy) as twitter_client:
                 try:
-                    await twitter_client.update_account_info()
+                    await twitter_client.establish_status()
                     final_message = f'{twitter_account.auth_token} '
                     # Подписка
                     for user_id in USER_IDS_TO_FOLLOW:
@@ -69,52 +64,34 @@ async def main():
                         print(f"{twitter_account} Подписался на {user_id}")
                         await asyncio.sleep(3)
 
-                    if MAKE_MODE:
+                    if MAKE_ZERO:
                     # Твит MODE
-                        mode_tweet = await twitter_client.quote(
-                            QUOT_MODE_TWEET_URL, get_random_world()
+                        zerolend_tweet = await twitter_client.quote(
+                            QUOT_ZEROLEND_TWEET_URL, get_random_world()
                         )
-                        print(f"{twitter_account} Сделал Quote твит (MODE): {mode_tweet.url}")
-                        print(f"\tТекст: {mode_tweet.text}")
-                        final_message = f'{final_message} {mode_tweet.url}'
+                        print(f"{twitter_account} Сделал Quote твит (ZEROLEND): {zerolend_tweet.url}")
+                        print(f"\tТекст: {zerolend_tweet.text}")
+                        final_message = f'{final_message} {zerolend_tweet.url}'
                         await asyncio.sleep(3)
 
-                    if MAKE_HLG:
+                    if MAKE_SPEC:
                         #Твит HLG
-                        hlg_tweet = await twitter_client.quote(
-                            QUOT_HLG_TWEET_URL, get_random_world()
+                        spec_tweet = await twitter_client.quote(
+                            QUOT_SPEC_TWEET_URL, get_random_world()
                         )
-                        print(f"{twitter_account} Сделал Quote твит (HLG): {hlg_tweet.url}")
-                        print(f"\tТекст: {hlg_tweet.text}")
-                        final_message = f'{final_message} {hlg_tweet.url}'
+                        print(f"{twitter_account} Сделал Quote твит (SPEC): {spec_tweet.url}")
+                        print(f"\tТекст: {spec_tweet.text}")
+                        final_message = f'{final_message} {spec_tweet.url}'
                         await asyncio.sleep(3)
 
-                    if MAKE_VENOM:
+                    if MAKE_BUBBLE:
                         # Твит VENOM
-                        venom_tweet = await twitter_client.quote(
-                            QUOT_VENOM_TWEET_URL, get_random_world()
+                        bubble_tweet = await twitter_client.quote(
+                            QUOT_BUBBLE_TWEET_URL, get_random_world()
                         )
-                        print(f"{twitter_account} Сделал Quote твит (VENOM): {venom_tweet.url}")
-                        print(f"\tТекст: {venom_tweet.text}")
-                        final_message = f'{final_message} {venom_tweet.url}'
-                        await asyncio.sleep(3)
-
-                    if MAKE_CELO:
-                        celo_tweet = await twitter_client.quote(
-                            QUOT_CELO_TWEET_URL, get_random_world()
-                        )
-                        print(f"{twitter_account} Сделал Quote твит (CELO): {celo_tweet.url}")
-                        print(f"\tТекст: {celo_tweet.text}")
-                        final_message = f'{final_message} {celo_tweet.url}'
-                        await asyncio.sleep(3)
-
-                    if MAKE_FOXY:
-                        foxy_tweet = await twitter_client.quote(
-                            QUOT_FOXY_TWEET_URL, get_random_world()
-                        )
-                        print(f"{twitter_account} Сделал Quote твит (FOXY): {foxy_tweet.url}")
-                        print(f"\tТекст: {foxy_tweet.text}")
-                        final_message = f'{final_message} {foxy_tweet.url}'
+                        print(f"{twitter_account} Сделал Quote твит (BUBBLE): {bubble_tweet.url}")
+                        print(f"\tТекст: {bubble_tweet.text}")
+                        final_message = f'{final_message} {bubble_tweet.url}'
                         await asyncio.sleep(3)
 
                     with open(RESULTS_TXT, "a") as results_file:
